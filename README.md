@@ -4,12 +4,13 @@ A containerised basic Python API used to test different cloud hosting methods
 
 ## Hosting methods
 
-### Local
+<details>
+<summary>Local</summary>
 
-#### Requirements
+### Requirements
 - Docker Desktop client
 
-#### Method
+### Method
 1. Install Docker Desktop (if not already) and ensure the Docker Engine is running 
 2. Clone this repo
 3. Open a terminal
@@ -21,16 +22,19 @@ A containerised basic Python API used to test different cloud hosting methods
    ```
 6. Open http://localhost:5000 in your favourite browser and check the routes in hello.py for the different endpoints available in the API
 
-### Amazon Lightsail
+</details>
 
-#### Requirements
+<details>
+<summary>Amazon Lightsail</summary>
+
+### Requirements
 - Docker Desktop client
 - AWS Account
 - AWS CLI
 - AWS CLI Lightsail extension
 
 
-#### Method (GUI and CLI)
+### Method (GUI and CLI)
 1. Log into the AWS Console
 2. Search for Lightsail and open from the results
 3. Select Containers from the left hand menu
@@ -49,3 +53,40 @@ A containerised basic Python API used to test different cloud hosting methods
 10. Go back into the Lightsail Containers page opened in step 3 and select the Container Service you created
 11. Go to the Deployments tab and 'Create your first deployment', selecting the Stored Image you just pushed up for the deployment, port 5000 on HTTP for the Public Endpoint and / as the Healthcheck Path
 12. Wait for the deployment to finish, then open the Public URL in your browser. You can check the endpoints available on the API in the hello.py file
+
+</details>
+
+<details>
+<summary> App Runner </summary>
+
+### Requirements
+- Docker Desktop client
+- AWS Account
+- AWS CLI
+
+### Method (GUI and CLI)
+1. Clone this repo locally 
+2. Log into the AWS Console
+3. Search for Elastic Container Registry and open from the results
+4. Select 'Get Started' to create your repository, example configuration below:
+    - Visibility Settings: Private
+    - Name: python-api
+5. From the left hand menu, select Private Registry -> Repositories
+6. Select your repository, then 'View push commands'
+7. Open Docker Desktop and make sure the Docker Engine is running
+8. Open a terminal, ensuring you are in your newly created python-api folder as your working directory
+9. Follow the instructions found via 'View push commands' in step 6
+10. Go back into the AWS Console and this time search for App Runner and open from the results
+11. Select 'Create an App Runner service', example configuration below:
+    - Repository type: Container Registry
+    - Provider: Amazon ECR
+    - Container image URI: Browse to find the image uploaded in step 9
+    - Deployment trigger: Manual
+    - ECR access role: AppRunnerECRAccessRole
+    - Service name: python-api
+    - Port: 5000
+    - Health check protocol: HTTP
+    - Health check path: / 
+12. Wait for the deployment to finish, then open the Public URL in your browser. You can check the endpoints available on the API in the hello.py file
+
+</details>
