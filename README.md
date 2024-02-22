@@ -90,3 +90,34 @@ A containerised basic Python API used to test different cloud hosting methods
 12. Wait for the deployment to finish, then open the Public URL in your browser. You can check the endpoints available on the API in the hello.py file
 
 </details>
+
+<details>
+<summary> AWS Copilot </summary>
+
+### Requirements
+- Docker Desktop client
+- AWS Account
+- AWS CLI
+- AWS Copilot CLI
+- AWS IAM role for running Copilot CLI commands
+
+### Method (CLI)
+1. Clone this repo locally 
+2. Open Docker Desktop and make sure the Docker Engine is running
+3. Open a terminal, ensuring you are in your newly created python-api folder as your working directory
+4. Follow [the instructions provided by AWS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html#copilot-install) to install the Copilot CLI (if not already installed)
+5. Ensure your AWS CLI is configured to use an IAM account, the below command can be used to update the default profile
+    ```
+    aws configure
+    ```
+6. Run the below command from the root of your repo
+    ```
+    copilot init
+    ```
+7. Below are example selections from the steps that will follow as part of the interactive initialisation
+    - Application name: python-api
+    - Workload type: Request-Driven Web Service
+    - Service name: python-api
+    - Environment name: dev
+8. Wait for the deployment to finish, then open the Public URL in your browser. You can check the endpoints available on the API in the hello.py file
+</details>
